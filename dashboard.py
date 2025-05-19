@@ -1,47 +1,33 @@
 import streamlit as st
 
-# Set page configuration
 st.set_page_config(page_title="QMS Dashboard", layout="wide")
-
-# Title
 st.title("Queue Management System Dashboard")
+st.markdown("Select a metric to view detailed results and visualizations.")
 
-# Introduction
-st.markdown("""
-This dashboard analyzes the QMS dataset to validate key assumptions about wait times, service times, and branch performance.
-Select an assumption from the sidebar or click a button below to explore.
-""")
-
-# Buttons for each assumption
-st.subheader("Explore Assumptions")
+# Create buttons for each result page
 col1, col2 = st.columns(2)
-
 with col1:
-    if st.button("Assumption 1: High-Traffic Branch Wait Times"):
-        st.switch_page("pages/assumption1.py")
-    if st.button("Assumption 2: Services and Service Time"):
-        st.switch_page("pages/assumption2.py")
-    if st.button("Assumption 3: Peak Hours Wait Times"):
-        st.switch_page("pages/assumption3.py")
-    if st.button("Assumption 4: Location 21 Transactions"):
-        st.switch_page("pages/assumption4.py")
-    if st.button("Assumption 5: Wait Time Overestimation"):
-        st.switch_page("pages/assumption5.py")
-
+    if st.button("Average Wait Time"):
+        st.switch_page("pages/avg_wait_time.py")
+    if st.button("Average Service Time by Service Type"):
+        st.switch_page("pages/avg_service_time_service_type.py")
+    if st.button("Total Transactions by Branch"):
+        st.switch_page("pages/total_transactions_branch.py")
+    if st.button("Peak Hour Transaction Volume"):
+        st.switch_page("pages/transactions_by_hour.py")
+    if st.button("Percentage of Long Wait Times"):
+        st.switch_page("pages/pct_long_wait.py")
 with col2:
-    if st.button("Assumption 6: Account_Opening Service Time"):
-        st.switch_page("pages/assumption6.py")
-    if st.button("Assumption 7: Weekend Wait Times"):
-        st.switch_page("pages/assumption7.py")
-    if st.button("Assumption 8: High-Priority Wait Times"):
-        st.switch_page("pages/assumption8.py")
-    if st.button("Assumption 9: Low-Traffic Total Time"):
-        st.switch_page("pages/assumption9.py")
-    if st.button("Assumption 10: Digital_Products Variance"):
-        st.switch_page("pages/assumption10.py")
+    if st.button("Average Wait Time by Day of Week"):
+        st.switch_page("pages/avg_wait_time_dayofweek.py")
+    if st.button("Branch Traffic Utilization"):
+        st.switch_page("pages/branch_traffic_utilization.py")
+    if st.button("Total Service Time for High-Priority Tokens"):
+        st.switch_page("pages/total_service_time_highpriority.py")
+    if st.button("Average Wait Time: Weekend vs. Weekday"):
+        st.switch_page("pages/avg_wait_time_weekendvsweekday.py")
+    if st.button("Customer Type Transaction Share"):
+        st.switch_page("pages/customer_type_share.py")
 
-# Note
-st.markdown("""
-**Note**: You can also navigate to each assumption using the sidebar menu.
-The dataset (QMS_dataset.csv) must be in the same directory as dashboard.py.
-""")
+st.markdown("---")
+st.write("Use the buttons above to explore metrics. Each page allows filtering by branch location.")

@@ -1,0 +1,39 @@
+import streamlit as st
+import pandas as pd
+import plotly.express as px
+
+st.set_page_config(page_title="Peak Hour Transaction Volume", layout="wide")
+st.title("Peak Hour Transaction Volume")
+
+# Load data
+qms_data = pd.read_csv("data/QMS_dataset.csv")
+location_data = pd.read_csv("data/location.csv")
+data = qms_data.merge(location_data, on="LOCATION_ID", how="left")
+
+# Filter by LOCATION_ID
+locations = data[["LOCATION_ID", "LOCATION"]].drop_duplicates().sort_values("LOCATION")
+location_options = ["All"] + locations["LOCATION"].tolist()
+selected_location = st.selectbox("Select Branch Location", location_options)
+
+# Apply filter
+if selected_location != "All":
+    location_id = locations[locations["LOCATION"] == selected_location]["LOCATION_ID"].iloc[0]
+    filtered_data = data[data["LOCATION_ID"] == location_id]
+else:
+    filtered_data = data
+
+# Calculate transactions by hour
+transactions_by_hour = filtered_data.groupby("HOUR_OF_DAY").size().reset_index(name="Transaction_Count")
+
+# Line plot
+fig = px.line(
+    transactions_by_hour,
+    x="HOUR_OF_DAY",
+    y="Transaction_Count",
+    title="Transactions by Hour of Day",
+    labels={"HOUR_OF_DAY": "Hour of Day", "Transaction_Count": "Number of Transactions"}
+)
+st.plotly_chart(fig, use_container_width=True)
+
+if st.button("Back to Dashboard"):
+    st.switch_page("dashboard.py")
