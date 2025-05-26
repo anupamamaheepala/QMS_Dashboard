@@ -17,9 +17,9 @@ with col1:
         st.switch_page("pages/transactions_by_hour.py")
     if st.button("Percentage of Long Wait Times"):
         st.switch_page("pages/pct_long_wait.py")
-with col2:
     if st.button("Average Wait Time by Day of Week"):
-        st.switch_page("pages/avg_wait_time_dayofweek.py")
+        st.switch_page("pages/avg_wait_time_dayofweek.py")    
+with col2:
     if st.button("Branch Traffic Utilization"):
         st.switch_page("pages/branch_traffic_utilization.py")
     if st.button("Total Service Time for High-Priority Tokens"):
@@ -28,6 +28,10 @@ with col2:
         st.switch_page("pages/avg_wait_time_weekendvsweekday.py")
     if st.button("Customer Type Transaction Share"):
         st.switch_page("pages/customer_type_share.py")
+    if st.button("Transactions by Customer and Service Type"):
+        st.switch_page("pages/transactions_by_customer_service.py")
+    if st.button("Transactions by Day and Service Type"):
+        st.switch_page("pages/transactions_by_day_and_service.py")
 
 st.markdown("---")
 st.write("Use the buttons above to explore metrics. Each page allows filtering by branch location.")
